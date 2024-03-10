@@ -1,0 +1,90 @@
+<div class="form-wrap center">
+  <br />
+  <mat-form-field appearance="outline" class="input">
+    <mat-label>Título</mat-label>
+    <input
+      matInput
+      placeholder="Título"
+      [(ngModel)]="newConference.title"
+      disabled="disabled"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="input">
+    <mat-label>Descripción</mat-label>
+    <textarea
+      matInput
+      placeholder="Descripción"
+      [(ngModel)]="newConference.description"
+      disabled="disabled"
+    ></textarea>
+  </mat-form-field>
+  <div class="schedules">
+      <div *ngFor="let schedule of data.conference.schedules; index as i">
+        <mat-form-field appearance="outline" class="input time">
+          <mat-label>Inicio</mat-label>
+          <input
+            matInput
+            [(ngModel)]="schedule.start"
+            type="time"
+            disabled="false"
+          />
+        </mat-form-field>
+      </div>
+  </div>
+
+  <mat-dialog-actions [ngSwitch]="data.action">
+    <button
+      mat-raised-button
+      color="primary"
+      class="input"
+      *ngSwitchCase="0"
+      mat-dialog-close
+    >
+      CERRAR
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addConference()"
+      class="input"
+      *ngSwitchCase="1"
+    >
+      GUARDAR
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="updateConference()"
+      class="input"
+      *ngSwitchCase="2"
+    >
+      GUARDAR
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="deleteConference()"
+      class="input"
+      *ngSwitchCase="3"
+    >
+      ELIMINAR
+    </button>
+  </mat-dialog-actions>
+</div>
+
+<!-- <mat-form-field appearance="outline" class="input">
+  <mat-label>Título</mat-label>
+  <input
+    matInput
+    placeholder="Título de la conferencia"
+    [(ngModel)]="newConference.title"
+  />
+</mat-form-field>
+<mat-form-field appearance="outline" class="input">
+  <mat-label>Descripción</mat-label>
+  <input
+    matInput
+    placeholder="Descripción"
+    [(ngModel)]="newConference.description"
+  />
+</mat-form-field> -->

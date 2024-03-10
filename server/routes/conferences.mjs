@@ -4,11 +4,12 @@ import { ObjectId } from "mongodb";
 
 const router = express.Router();
 
-// Get a list of 50 users
-router.get("/", async (req, res) => {
-  let collection = await db.collection("users");
-  let results = await collection.find({})
-    .limit(50)
+// Fetches the conferences corresponding to the page and page size
+router.post("/", async (req, res) => {
+  let collection = await db.collection("conferences");
+  let results = await collection.find()
+    .skip((req.body.page -1) * req.body.pageSize)
+    .limit(req.body.pageSize)
     .toArray();
 
   res.send(results).status(200);
@@ -34,15 +35,6 @@ router.get("/:id", async (req, res) => {
 
   if (!result) res.send("Not found").status(404);
   else res.send(result).status(200);
-});
-
-// Add a new document to the collection
-router.post("/", async (req, res) => {
-  let collection = await db.collection("users");
-  let newDocument = req.body;
-  newDocument.date = new Date();
-  let result = await collection.insertOne(newDocument);
-  res.send(result).status(204);
 });
 
 // TODO Adaptar a usuarios/conferencias

@@ -51,7 +51,7 @@ router.get("/username/:username", async (req, res) => {
 // Verify login credentials
 router.post("/login", async (req, res) => {
   let collection = await db.collection("users");
-  let newDocument = req.body;
+  // let newDocument = req.body;
   let query = { username: req.body.username, password: req.body.password };
   let result = await collection.findOne(query);
 

@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { User } from '../../models/user.model';
 import { HttpClientModule } from '@angular/common/http';
@@ -40,7 +40,7 @@ export class LoginComponent {
   }
 
   login() {
-    this.router.navigate(['/conferencia']);
+    this.router.navigate(['/conference']);
   }
 
   validateLogin() {
