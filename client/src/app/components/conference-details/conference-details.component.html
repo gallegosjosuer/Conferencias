@@ -1,9 +1,9 @@
 <div class="form-wrap center">
   <mat-dialog-actions [ngSwitch]="data.action">
     <h1 *ngSwitchCase="0">DETALLES</h1>
-    <h1 *ngSwitchCase="1">CREAR CONFERENCIA</h1>
-    <h1 *ngSwitchCase="2">ACTUALIZAR CONFERENCIA</h1>
-    <h1 *ngSwitchCase="3">ELIMINAR CONFERENCIA</h1>
+    <h1 *ngSwitchCase="1">CREAR</h1>
+    <h1 *ngSwitchCase="2">ACTUALIZAR</h1>
+    <h1 *ngSwitchCase="3">ELIMINAR</h1>
   </mat-dialog-actions>
   <br />
   <mat-form-field appearance="outline" class="input">
@@ -12,7 +12,7 @@
       matInput
       placeholder="Título"
       [(ngModel)]="data.conference.title"
-      disabled="false"
+      class="editable"
     />
   </mat-form-field>
   <mat-form-field appearance="outline" class="input">
@@ -21,7 +21,7 @@
       matInput
       placeholder="Descripción"
       [(ngModel)]="data.conference.description"
-      disabled="false"
+      id="editable"
     ></textarea>
   </mat-form-field>
   <h2>HORARIOS</h2>
@@ -93,7 +93,7 @@
       class="input"
       *ngSwitchCase="2"
     >
-      GUARDAR
+      ACTUALIZAR
     </button>
     <button
       mat-raised-button

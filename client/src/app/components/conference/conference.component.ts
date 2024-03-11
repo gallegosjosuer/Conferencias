@@ -6,12 +6,8 @@ import { Conference } from '../../models/conference.model';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogTitle,
-  MatDialogContent,
-} from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { ConferenceService } from '../../services/conference.service';
 import { ConferenceDetailsComponent } from '../conference-details/conference-details.component';
@@ -27,6 +23,7 @@ import { ConferenceDetailsComponent } from '../conference-details/conference-det
     MatInputModule,
     MatButtonModule,
     MatTableModule,
+    MatIconModule,
     HttpClientModule,
   ],
   providers: [ConferenceService],
@@ -34,7 +31,13 @@ import { ConferenceDetailsComponent } from '../conference-details/conference-det
   styleUrl: './conference.component.css',
 })
 export class ConferenceComponent {
-  displayedColumns: string[] = ['titulo', 'descripcion', 'lugares', 'fechas'];
+  displayedColumns: string[] = [
+    'titulo',
+    'descripcion',
+    'lugares',
+    'fechas',
+    'acciones',
+  ];
   public conferencesDataSource: MatTableDataSource<any>;
 
   constructor(
@@ -77,6 +80,18 @@ export class ConferenceComponent {
           schedules: [],
         },
       },
+    });
+  }
+
+  editConference(row: Conference) {
+    this.dialog.open(ConferenceDetailsComponent, {
+      data: { action: 2, conference: row },
+    });
+  }
+
+  deleteConference(row: Conference) {
+    this.dialog.open(ConferenceDetailsComponent, {
+      data: { action: 3, conference: row },
     });
   }
 }

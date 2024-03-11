@@ -33,13 +33,17 @@ import { CommonModule } from '@angular/common';
 })
 export class ConferenceDetailsComponent {
   public newConference: Conference;
-  public disabled = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.newConference = new Conference();
     console.log('ACTION: ', this.data.action);
     console.log('DATA: ', this.data.conference);
-    this.disabled = this.data.action == 0 ? true : false;
+
+    if (this.data.action == 0 || this.data.action == 3) this.disableForm();
+  }
+
+  disableForm() {
+    // document.getElementById("a")?.ariaDisabled = true
   }
 
   addConference() {

@@ -44,10 +44,44 @@
               </td>
             </ng-container>
 
+            <!-- Acciones -->
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Editar/Borrar
+              </th>
+              <td mat-cell *matCellDef="let row" class="center actions-cell">
+                <button mat-icon-button color="primary" aria-label="Detalles" (click)="seeDetails(row)">
+                  <mat-icon>remove_red_eye</mat-icon>
+                </button>
+                <button mat-icon-button color="accent" aria-label="Editar" (click)="editConference(row)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" aria-label="Borrar" (click)="deleteConference(row)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+
+                <!-- <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="editConference(row)"
+                  class="input"
+                >
+                  A
+                </button>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="deleteConference(row)"
+                  class="input"
+                >
+                  B
+                </button> -->
+              </td>
+            </ng-container>
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr
               mat-row
-              (click)="seeDetails(row)"
               *matRowDef="let row; columns: displayedColumns"
             ></tr>
           </table>
