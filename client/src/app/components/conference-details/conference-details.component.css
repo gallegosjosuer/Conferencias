@@ -6,11 +6,15 @@
 .form-wrap {
   padding: 1em;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   flex-direction: column;
+  height: 90vh;
+  overflow-y: scroll;
 }
 
 .input {
-  width: 30em;
+  width: 100%;
 }
 
 button {
@@ -24,10 +28,21 @@ button {
   justify-content: center;
 }
 
-.schedules {
-    display: flex;
+.schedule {
+  display: flex;
+  justify-content: space-between;
 }
 
-.date, time {
-    width: 50px;
+.date {
+  width: 50%;
+}
+
+.time {
+  width: 9ch;
+}
+
+hr {
+    height: 2px;
+    color: black;
+    background-color: black;
 }
