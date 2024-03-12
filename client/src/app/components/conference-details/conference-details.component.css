@@ -13,6 +13,10 @@
   overflow-y: scroll;
 }
 
+.no-overflow {
+  overflow: auto;
+}
+
 .input {
   width: 100%;
 }
