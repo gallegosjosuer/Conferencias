@@ -4,7 +4,6 @@ import { ObjectId } from "mongodb";
 
 const router = express.Router();
 
-// TODO Adaptar a usuarios/conferencias
 // Get a list of 50 users
 router.get("/", async (req, res) => {
   let collection = await db.collection("users");
@@ -13,7 +12,6 @@ router.get("/", async (req, res) => {
   res.send(results).status(200);
 });
 
-// TODO Adaptar a usuarios/conferencias
 // Fetches the latest users
 router.get("/latest", async (req, res) => {
   let collection = await db.collection("users");
@@ -27,7 +25,6 @@ router.get("/latest", async (req, res) => {
   res.send(results).status(200);
 });
 
-// TODO Adaptar a usuarios/conferencias
 // Get a single user by id
 router.get("/:id", async (req, res) => {
   let collection = await db.collection("users");
@@ -63,34 +60,8 @@ router.post("/login", async (req, res) => {
 router.post("/signup", async (req, res) => {
   let collection = await db.collection("users");
   let newDocument = req.body;
-  // newDocument.date = new Date();
   let result = await collection.insertOne(newDocument);
   res.send(result).status(204);
-});
-
-// TODO Adaptar a usuarios/conferencias
-// Update the post with a new comment
-router.patch("/comment/:id", async (req, res) => {
-  const query = { _id: ObjectId(req.params.id) };
-  const updates = {
-    $push: { comments: req.body },
-  };
-
-  let collection = await db.collection("users");
-  let result = await collection.updateOne(query, updates);
-
-  res.send(result).status(200);
-});
-
-// TODO Adaptar a usuarios/conferencias
-// Delete an entry
-router.delete("/:id", async (req, res) => {
-  const query = { _id: ObjectId(req.params.id) };
-
-  const collection = db.collection("users");
-  let result = await collection.deleteOne(query);
-
-  res.send(result).status(200);
 });
 
 export default router;

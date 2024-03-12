@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user.model';
 import { baseUrl } from '../config';
+import { Conference } from '../models/conference.model';
 
 @Injectable()
 export class ConferenceService {
@@ -14,14 +14,24 @@ export class ConferenceService {
     });
   }
 
-  validateSignUp(user: User) {
-    return this.http.get(`${baseUrl}/conferences/username/${user.username}`);
+  addConference(conference: Conference) {
+
+    return this.http.post(`${baseUrl}/conferences/add`, {
+      title: conference.title,
+      description: conference.description,
+      schedules: conference.schedules
+    });
   }
 
-  signUp(user: User) {
-    return this.http.post(`${baseUrl}/conferences/signup`, {
-      username: user.username,
-      password: user.password,
+  updateConference(id: string, conference: Conference) {
+    return this.http.patch(`${baseUrl}/conferences/${id}`, {
+      title: conference.title,
+      description: conference.description,
+      schedules: conference.schedules
     });
+  }
+
+  deleteConference(id: string) {
+    return this.http.delete(`${baseUrl}/conferences/${id}`);
   }
 }
