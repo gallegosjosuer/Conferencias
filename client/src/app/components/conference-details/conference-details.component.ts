@@ -35,6 +35,11 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class ConferenceDetailsComponent {
   public conference;
+  public newSpeaker = '';
+  public newPlace = '';
+  public newDate = '';
+  public newStart = '';
+  public newEnd = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
