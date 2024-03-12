@@ -6,26 +6,27 @@
     <h1 *ngSwitchCase="3">ELIMINAR</h1>
   </mat-dialog-actions>
   <br />
-  <mat-form-field appearance="outline" class="input">
-    <mat-label>Título</mat-label>
-    <input
-      matInput
-      placeholder="Título"
-      [(ngModel)]="data.conference.title"
-      class="editable"
-    />
-  </mat-form-field>
-  <mat-form-field appearance="outline" class="input">
-    <mat-label>Descripción</mat-label>
-    <textarea
-      matInput
-      placeholder="Descripción"
-      [(ngModel)]="data.conference.description"
-      id="editable"
-    ></textarea>
-  </mat-form-field>
-  <h2>HORARIOS</h2>
-  <div *ngIf="data.action == 1">
+
+  <div *ngIf="data.action == 1; else elseBlock">
+    <mat-form-field appearance="outline" class="input">
+      <mat-label>Título</mat-label>
+      <input
+        matInput
+        placeholder="Título"
+        [(ngModel)]="newTitle"
+        class="editable"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="input">
+      <mat-label>Descripción</mat-label>
+      <textarea
+        matInput
+        placeholder="Descripción"
+        [(ngModel)]="newDescription"
+        id="editable"
+      ></textarea>
+    </mat-form-field>
+    <h2>HORARIOS</h2>
     <mat-form-field appearance="outline" class="input">
       <mat-label>Expositor</mat-label>
       <input matInput [(ngModel)]="newSpeaker" />
@@ -50,32 +51,54 @@
     </div>
     <br />
   </div>
-  <div *ngFor="let schedule of data.conference.schedules; index as i">
+
+  <ng-template #elseBlock>
     <mat-form-field appearance="outline" class="input">
-      <mat-label>Expositor</mat-label>
-      <input matInput [(ngModel)]="schedule.speaker" />
+      <mat-label>Título</mat-label>
+      <input
+        matInput
+        placeholder="Título"
+        [(ngModel)]="data.conference.title"
+        class="editable"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline" class="input">
-      <mat-label>Lugar</mat-label>
-      <input matInput [(ngModel)]="schedule.place" />
+      <mat-label>Descripción</mat-label>
+      <textarea
+        matInput
+        placeholder="Descripción"
+        [(ngModel)]="data.conference.description"
+        id="editable"
+      ></textarea>
     </mat-form-field>
-    <div class="schedule">
-      <mat-form-field appearance="outline" class="input date">
-        <mat-label>Fecha</mat-label>
-        <input matInput [(ngModel)]="schedule.date" type="date" />
+    <h2>HORARIOS</h2>
+    <div *ngFor="let schedule of data.conference.schedules; index as i">
+      <mat-form-field appearance="outline" class="input">
+        <mat-label>Expositor</mat-label>
+        <input matInput [(ngModel)]="schedule.speaker" />
       </mat-form-field>
-      <mat-form-field appearance="outline" class="input time">
-        <mat-label>Inicio</mat-label>
-        <input matInput [(ngModel)]="schedule.start" type="time" />
+      <mat-form-field appearance="outline" class="input">
+        <mat-label>Lugar</mat-label>
+        <input matInput [(ngModel)]="schedule.place" />
       </mat-form-field>
-      <mat-form-field appearance="outline" class="input time">
-        <mat-label>Fin</mat-label>
-        <input matInput [(ngModel)]="schedule.end" type="time" />
-      </mat-form-field>
+      <div class="schedule">
+        <mat-form-field appearance="outline" class="input date">
+          <mat-label>Fecha</mat-label>
+          <input matInput [(ngModel)]="schedule.date" type="date" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input time">
+          <mat-label>Inicio</mat-label>
+          <input matInput [(ngModel)]="schedule.start" type="time" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input time">
+          <mat-label>Fin</mat-label>
+          <input matInput [(ngModel)]="schedule.end" type="time" />
+        </mat-form-field>
+      </div>
+      <hr />
+      <br />
     </div>
-    <hr />
-    <br />
-  </div>
+  </ng-template>
 
   <mat-dialog-actions [ngSwitch]="data.action">
     <button

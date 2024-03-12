@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ConferenceService } from '../../services/conference.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { Conference } from '../../models/conference.model';
 
 @Component({
   selector: 'app-conference-details',
@@ -35,6 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class ConferenceDetailsComponent {
   public conference;
+  public newTitle = '';
+  public newDescription = '';
   public newSpeaker = '';
   public newPlace = '';
   public newDate = '';
@@ -58,7 +61,29 @@ export class ConferenceDetailsComponent {
   }
 
   addConference() {
-    console.log(this.data);
+    let newConference: Conference = new Conference();
+
+    newConference.title = this.newTitle;
+    newConference.description = this.newDescription;
+    newConference.schedules[0] = {
+      date: this.newDate,
+      start: this.newStart,
+      end: this.newEnd,
+      place: this.newPlace,
+      speaker: this.newSpeaker,
+    };
+
+    this.conferenceService.addConference(newConference).subscribe(
+      (result) => {
+        this.dialogRef.close();
+        alert('Conferencia insertada');
+        window.location.reload();
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   updateConference() {
