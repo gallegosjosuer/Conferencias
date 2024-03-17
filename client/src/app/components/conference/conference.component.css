@@ -38,6 +38,7 @@ button {
 }
 
 .actions-cell {
+  justify-content: flex-start;
   margin: 0%;
   padding: 0;
 }

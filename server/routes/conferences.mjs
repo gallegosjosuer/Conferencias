@@ -39,7 +39,7 @@ router.patch("/:id", async (req, res) => {
   console.log("UPDATE", req.body);
   const query = { _id: ObjectId(req.params.id) };
   const updates = {
-    $push: {
+    $set: {
       title: req.body.title,
       description: req.body.description,
       schedules: req.body.schedules,

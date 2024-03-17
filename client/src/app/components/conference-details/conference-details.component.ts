@@ -115,4 +115,29 @@ export class ConferenceDetailsComponent {
       }
     );
   }
+
+  formatDate(date: string) {
+    if (date == '') return '-';
+
+    let meses = [
+      'Enero',
+      'Febrero',
+      'Marzo',
+      'Abril',
+      'Mayo',
+      'Junio',
+      'Julio',
+      'Agosto',
+      'Septiembre',
+      'Octubre',
+      'Noviembre',
+      'Diciembre',
+    ];
+    let mes = parseInt(date.substring(5, 7)) - 1;
+    let newDate = `${date.substring(8)} de
+                  ${meses[mes]} del
+                  ${date.substring(0, 4)}`;
+
+    return newDate;
+  }
 }
