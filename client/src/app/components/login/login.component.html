@@ -55,7 +55,6 @@
                 placeholder="Elige un nombre"
                 [(ngModel)]="userSignUp.username"
               />
-              
             </mat-form-field>
             <mat-form-field appearance="outline" class="input">
               <mat-label>Contraseña</mat-label>
@@ -64,7 +63,14 @@
                 placeholder="Elige una contraseña"
                 [(ngModel)]="userSignUp.password"
               />
-              
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Rol</mat-label>
+              <mat-select [(ngModel)]="userSignUp.role">
+                @for (role of roles; track role) {
+                <mat-option [value]="role.id">{{ role.value }}</mat-option>
+                }
+              </mat-select>
             </mat-form-field>
             <button
               mat-raised-button

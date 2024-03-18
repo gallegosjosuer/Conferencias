@@ -13,7 +13,7 @@ import { ConferenceService } from '../../services/conference.service';
 import { ConferenceDetailsComponent } from '../conference-details/conference-details.component';
 
 @Component({
-  selector: 'app-conference',
+  selector: 'app-conference-crud',
   standalone: true,
   imports: [
     MatCardModule,
@@ -27,18 +27,24 @@ import { ConferenceDetailsComponent } from '../conference-details/conference-det
     HttpClientModule,
   ],
   providers: [ConferenceService],
-  templateUrl: './conference.component.html',
-  styleUrl: './conference.component.css',
+  templateUrl: './conference-crud.component.html',
+  styleUrl: './conference-crud.component.css',
 })
-export class ConferenceComponent {
-  displayedColumns: string[] = ['titulo', 'descripcion', 'lugares', 'fechas'];
+export class ConferenceCrudComponent {
+  displayedColumns: string[] = [
+    'titulo',
+    'descripcion',
+    'lugares',
+    'fechas',
+    'acciones',
+  ];
   public conferencesDataSource: MatTableDataSource<any>;
 
   constructor(
     private conferenceService: ConferenceService,
     public dialog: MatDialog
   ) {
-    this.conferencesDataSource = new MatTableDataSource();
+    // this.conferencesDataSource = new MatTableDataSource();
   }
 
   ngAfterViewInit() {
@@ -60,6 +66,32 @@ export class ConferenceComponent {
   seeDetails(row: Conference) {
     this.dialog.open(ConferenceDetailsComponent, {
       data: { action: 0, conference: row },
+    });
+  }
+
+  saveConference() {
+    this.dialog.open(ConferenceDetailsComponent, {
+      data: {
+        action: 1,
+        conference: {
+          _id: null,
+          title: null,
+          description: null,
+          schedules: [],
+        },
+      },
+    });
+  }
+
+  editConference(row: Conference) {
+    this.dialog.open(ConferenceDetailsComponent, {
+      data: { action: 2, conference: row },
+    });
+  }
+
+  deleteConference(row: Conference) {
+    this.dialog.open(ConferenceDetailsComponent, {
+      data: { action: 3, conference: row },
     });
   }
 }

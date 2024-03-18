@@ -7,6 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 import { LoginService } from '../../services/login.service';
 import { User } from '../../models/user.model';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatButtonModule,
     HttpClientModule,
+    MatSelectModule,
   ],
   providers: [LoginService],
   templateUrl: './login.component.html',
@@ -33,14 +35,27 @@ export class LoginComponent {
   remember_session = false;
   public userLogIn: User;
   public userSignUp: User;
+  public roles = [
+    { id: 1, value: 'Administrador' },
+    { id: 2, value: 'Usuario Normal' },
+  ];
 
   constructor(private router: Router, private loginService: LoginService) {
     this.userLogIn = new User();
     this.userSignUp = new User();
   }
 
-  login() {
-    this.router.navigate(['/conference']);
+  // Role 1 = admin; Role 2 = normal user
+  login(role: number) {
+    switch (role) {
+      case 1:
+        this.router.navigate(['/conference-crud']);
+        break;
+    
+      default:
+        this.router.navigate(['/conference']);
+        break;
+    }
   }
 
   validateLogin() {
@@ -48,7 +63,7 @@ export class LoginComponent {
       this.loginService.validateLogin(this.userLogIn).subscribe(
         (result) => {
           if (result) {
-            this.login();
+            this.login(this.userLogIn.role);
           } else {
             alert('Contraseña equivocada');
           }
@@ -64,7 +79,12 @@ export class LoginComponent {
   }
 
   signUp() {
-    if (this.userSignUp.username && this.userSignUp.password) {
+    console.log(this.userSignUp);
+    if (
+      this.userSignUp.username &&
+      this.userSignUp.password &&
+      this.userSignUp.role
+    ) {
       this.loginService.validateSignUp(this.userSignUp).subscribe(
         (userAlreadyExists) => {
           if (userAlreadyExists) {
@@ -72,7 +92,7 @@ export class LoginComponent {
           } else {
             this.loginService.signUp(this.userSignUp).subscribe(
               (result) => {
-                this.login();
+                this.login(this.userSignUp.role);
                 console.log(result);
               },
               (error) => {
@@ -86,7 +106,7 @@ export class LoginComponent {
         }
       );
     } else {
-      alert('Ingresar un usuario y contraseña');
+      alert('Ingresar un usuario, contraseña y un rol');
     }
   }
 
