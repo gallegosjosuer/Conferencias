@@ -22,6 +22,7 @@ export class LoginService {
     return this.http.post(`${baseUrl}/users/signup`, {
       username: user.username,
       password: user.password,
+      role: user.role,
     });
   }
 }
