@@ -15,11 +15,10 @@ export class ConferenceService {
   }
 
   addConference(conference: Conference) {
-
     return this.http.post(`${baseUrl}/conferences/add`, {
       title: conference.title,
       description: conference.description,
-      schedules: conference.schedules
+      schedules: conference.schedules,
     });
   }
 
@@ -27,7 +26,10 @@ export class ConferenceService {
     return this.http.patch(`${baseUrl}/conferences/${id}`, {
       title: conference.title,
       description: conference.description,
-      schedules: conference.schedules
+      schedules: conference.schedules,
+      attendees: conference.attendees,
+      availableSpots: conference.availableSpots,
+      isFull: conference.isFull,
     });
   }
 

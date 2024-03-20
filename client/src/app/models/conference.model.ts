@@ -2,11 +2,17 @@ export class Conference {
   public title;
   public description;
   public schedules;
+  public attendees;
+  public availableSpots;
+  public isFull;
 
   constructor() {
     this.title = '';
     this.description = '';
     this.schedules = new Array(Schedules);
+    this.attendees = [];
+    this.availableSpots = 0;
+    this.isFull = false;
   }
 }
 

@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { LoginService } from '../../services/login.service';
@@ -46,14 +46,15 @@ export class LoginComponent {
   }
 
   // Role 1 = admin; Role 2 = normal user
-  login(role: number) {
+  login(role: number, id: string) {
+    const navigationExtras: NavigationExtras = {state: {userId: id}};
     switch (role) {
       case 1:
-        this.router.navigate(['/conference-crud']);
+        this.router.navigate(['/conference-crud'], navigationExtras);
         break;
 
       default:
-        this.router.navigate(['/conference']);
+        this.router.navigate(['/conference'], navigationExtras);
         break;
     }
   }
@@ -63,7 +64,7 @@ export class LoginComponent {
       this.loginService.validateLogin(this.userLogIn).subscribe(
         (result: any) => {
           if (result != null) {
-            this.login(result.role);
+            this.login(result.role, result._id);
           } else {
             alert('Contraseña equivocada');
           }
@@ -91,8 +92,8 @@ export class LoginComponent {
             alert('El usuario ya existe');
           } else {
             this.loginService.signUp(this.userSignUp).subscribe(
-              (result) => {
-                this.login(this.userSignUp.role);
+              (result: any) => {
+                this.login(this.userSignUp.role, result.insertedId);
                 console.log(result);
               },
               (error) => {

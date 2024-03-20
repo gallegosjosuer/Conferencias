@@ -43,6 +43,9 @@ router.patch("/:id", async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       schedules: req.body.schedules,
+      attendees: req.body.attendees,
+      availableSpots: req.body.availableSpots,
+      isFull: req.body.isFull,
     },
   };
 
