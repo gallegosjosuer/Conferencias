@@ -51,7 +51,7 @@ export class LoginComponent {
       case 1:
         this.router.navigate(['/conference-crud']);
         break;
-    
+
       default:
         this.router.navigate(['/conference']);
         break;
@@ -61,9 +61,9 @@ export class LoginComponent {
   validateLogin() {
     if (this.userLogIn.username && this.userLogIn.password) {
       this.loginService.validateLogin(this.userLogIn).subscribe(
-        (result) => {
-          if (result) {
-            this.login(this.userLogIn.role);
+        (result: any) => {
+          if (result != null) {
+            this.login(result.role);
           } else {
             alert('Contraseña equivocada');
           }

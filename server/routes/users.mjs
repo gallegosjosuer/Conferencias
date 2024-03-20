@@ -52,8 +52,9 @@ router.post("/login", async (req, res) => {
   let query = { username: req.body.username, password: req.body.password };
   let result = await collection.findOne(query);
 
-  if (!result) res.send(false);
-  else res.send(true);
+  res.send(result).status(204);
+  // if (!result) res.send(false);
+  // else res.send(true);
 });
 
 // Add a new document to the collection
