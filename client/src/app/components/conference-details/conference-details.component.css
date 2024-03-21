@@ -41,7 +41,7 @@ button {
 .detail {
   display: flex;
   align-items: center;
-  height: 2em;
+  min-height: 2em;
 }
 
 .schedule {

@@ -38,6 +38,7 @@ export class ConferenceDetailsComponent {
   public conference;
   public newTitle = '';
   public newDescription = '';
+  public newAvailableSpots = '';
   public newSpeaker = '';
   public newPlace = '';
   public newDate = '';
@@ -65,6 +66,8 @@ export class ConferenceDetailsComponent {
 
     newConference.title = this.newTitle;
     newConference.description = this.newDescription;
+    newConference.availableSpots = this.newAvailableSpots;
+    newConference.attendees = new Array();
     newConference.schedules[0] = {
       date: this.newDate,
       start: this.newStart,

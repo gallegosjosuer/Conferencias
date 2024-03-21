@@ -19,6 +19,8 @@ export class ConferenceService {
       title: conference.title,
       description: conference.description,
       schedules: conference.schedules,
+      attendees: conference.attendees,
+      availableSpots: conference.availableSpots,
     });
   }
 
