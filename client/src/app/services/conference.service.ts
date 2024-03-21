@@ -29,7 +29,6 @@ export class ConferenceService {
       schedules: conference.schedules,
       attendees: conference.attendees,
       availableSpots: conference.availableSpots,
-      isFull: conference.isFull,
     });
   }
 

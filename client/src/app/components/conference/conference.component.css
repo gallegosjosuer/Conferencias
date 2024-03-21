@@ -47,7 +47,16 @@ button {
   width: 100%;
 }
 
-.mat-mdc-outlined-button:not(:disabled), .btn-full {
+.mat-mdc-outlined-button:not(:disabled),
+.btn-full {
   color: gray;
   cursor: auto;
+}
+
+.mat-mdc-cell {
+  overflow: hidden;
+  max-width: 35ch;
+  text-overflow: ellipsis;
+  width: fit-content;
+  white-space: nowrap;
 }

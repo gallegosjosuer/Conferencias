@@ -47,7 +47,9 @@
 
             <!-- Asistentes -->
             <ng-container matColumnDef="asistentes">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Asistentes</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Asistentes
+              </th>
               <td mat-cell *matCellDef="let row">
                 {{ row.attendees.length }}/{{ row.availableSpots }}
               </td>
@@ -57,16 +59,35 @@
             <ng-container matColumnDef="disponibles">
               <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
               <td mat-cell *matCellDef="let row">
-                <div *ngIf="!row.isFull && !verifyAttendance(row)">
-                  <button mat-raised-button color="primary" (click)="$event.stopPropagation();addAttendance(row)" class="btn-attend">Asistir</button>
+                <div *ngIf="!isFull(row) && !verifyAttendance(row)">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="$event.stopPropagation(); addAttendance(row)"
+                    class="btn-attend"
+                  >
+                    Asistir
+                  </button>
                 </div>
-                <div *ngIf="!row.isFull && verifyAttendance(row)">
-                  <button mat-raised-button color="warn" (click)="$event.stopPropagation();deleteAttendance(row)" class="btn-attend">Cancelar</button>
+                <div *ngIf="verifyAttendance(row)">
+                  <button
+                    mat-raised-button
+                    color="warn"
+                    (click)="$event.stopPropagation(); deleteAttendance(row)"
+                    class="btn-attend"
+                  >
+                    Cancelar
+                  </button>
                 </div>
-                <div *ngIf="row.isFull">
-                  <button mat-stroked-button (click)="$event.stopPropagation();" class="btn-attend btn-full">Lleno</button>
+                <div *ngIf="isFull(row) && !verifyAttendance(row)">
+                  <button
+                    mat-stroked-button
+                    (click)="$event.stopPropagation()"
+                    class="btn-attend btn-full"
+                  >
+                    Lleno
+                  </button>
                 </div>
-                
               </td>
             </ng-container>
 

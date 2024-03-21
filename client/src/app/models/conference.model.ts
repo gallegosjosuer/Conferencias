@@ -4,7 +4,6 @@ export class Conference {
   public schedules;
   public attendees;
   public availableSpots;
-  public isFull;
 
   constructor() {
     this.title = '';
@@ -12,7 +11,6 @@ export class Conference {
     this.schedules = new Array(Schedules);
     this.attendees = [];
     this.availableSpots = 0;
-    this.isFull = false;
   }
 }
 

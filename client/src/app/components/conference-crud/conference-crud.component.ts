@@ -36,6 +36,7 @@ export class ConferenceCrudComponent {
     'descripcion',
     'lugares',
     'fechas',
+    'asistentes',
     'acciones',
   ];
   public conferencesDataSource: MatTableDataSource<any>;

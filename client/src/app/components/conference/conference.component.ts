@@ -94,7 +94,6 @@ export class ConferenceComponent {
         (result) => {
           alert('Asistencia confirmada');
           console.log(result, conference);
-
         },
         (error) => {
           console.log(error);
@@ -105,18 +104,25 @@ export class ConferenceComponent {
   deleteAttendance(conference: any) {
     const index = conference.attendees.indexOf(this.userId);
     if (index > -1) conference.attendees.splice(index, 1);
-    
+
     this.conferenceService
       .updateConference(conference._id, conference)
       .subscribe(
         (result) => {
           alert('Asistencia eliminada');
           console.log(result);
-          
         },
         (error) => {
           console.log(error);
         }
       );
+  }
+
+  isFull(conference: Conference) {
+    if (conference.attendees.length < conference.availableSpots) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
